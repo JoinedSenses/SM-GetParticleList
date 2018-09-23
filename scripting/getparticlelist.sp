@@ -6,6 +6,14 @@
 
 char g_sFilePath[PLATFORM_MAX_PATH];
 
+public Plugin myinfo = {
+	name = "Get Particle List",
+	author = "JoinedSenses",
+	description = "Retrieve and save current particle list",
+	version = "1.0",
+	url = "https://github.com/JoinedSenses"
+};
+
 public void OnPluginStart() {
 	RegAdminCmd("sm_getparticlelist", cmdGetParticleList, ADMFLAG_ROOT);
 	BuildPath(Path_SM, g_sFilePath, sizeof(g_sFilePath), "configs/particles");
