@@ -5,6 +5,7 @@
 #include <sdktools>
 
 char g_sFilePath[PLATFORM_MAX_PATH];
+char g_sGame[32];
 
 public Plugin myinfo = {
 	name = "Get Particle List",
@@ -27,10 +28,9 @@ public void OnPluginStart() {
 		}
 	}
 
-	char game[32];
-	GetGameFolderName(game, sizeof(game));
+	GetGameFolderName(g_sGame, sizeof(g_sGame));
 
-	BuildPath(Path_SM, g_sFilePath, sizeof(g_sFilePath), "/data/particles/%s_particles.txt", game);
+	BuildPath(Path_SM, g_sFilePath, sizeof(g_sFilePath), "/data/particles/%s_particles.txt", g_sGame);
 }
 
 public Action cmdGetParticleList(int client, int args) {
@@ -53,7 +53,7 @@ public Action cmdGetParticleList(int client, int args) {
 
 	delete file;
 
-	ReplyToCommand(client, "Successfully wrote particles to file");
+	ReplyToCommand(client, "Particles file generated successfully for %s at: %s", g_sGame, g_sFilePath);
 	
 	return Plugin_Handled;
 }
