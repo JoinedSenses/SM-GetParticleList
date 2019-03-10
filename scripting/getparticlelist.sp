@@ -19,7 +19,6 @@ public void OnPluginStart() {
 	RegAdminCmd("sm_getparticlelist", cmdGetParticleList, ADMFLAG_ROOT);
 
 	BuildPath(Path_SM, g_sFilePath, sizeof(g_sFilePath), "data/particles");
-
 	if (!DirExists(g_sFilePath)) {
 		CreateDirectory(g_sFilePath, 511);
 
@@ -29,7 +28,6 @@ public void OnPluginStart() {
 	}
 
 	GetGameFolderName(g_sGame, sizeof(g_sGame));
-
 	BuildPath(Path_SM, g_sFilePath, sizeof(g_sFilePath), "/data/particles/%s.txt", g_sGame);
 }
 
