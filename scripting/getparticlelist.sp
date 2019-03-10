@@ -15,26 +15,26 @@ public Plugin myinfo =
 
 public void OnPluginStart()
 {
-	char g_sFilePath[PLATFORM_MAX_PATH];
-	BuildPath(Path_SM, g_sFilePath, sizeof(g_sFilePath), "configs/data/particles/");
+	char sPath[PLATFORM_MAX_PATH];
+	BuildPath(Path_SM, sPath, sizeof(sPath), "data/particles/");
 	
-	if (!DirExists(g_sFilePath))
+	if (!DirExists(sPath))
 	{
-		CreateDirectory(g_sFilePath, 511);
+		CreateDirectory(sPath, 511);
 		
-		if (DirExists(g_sFilePath))
-			ThrowError("Error finding and creating directory: %s", g_sFilePath);
+		if (!DirExists(sPath))
+			ThrowError("Error finding and creating directory: %s", sPath);
 	}
 	
 	char sGame[32];
 	GetGameFolderName(sGame, sizeof(sGame));
 	
-	BuildPath(Path_SM, g_sFilePath, sizeof(g_sFilePath), "configs/data/particles/%s.txt", sGame);
+	BuildPath(Path_SM, sPath, sizeof(sPath), "data/particles/%s.txt", sGame);
 	
-	File file = OpenFile(g_sFilePath, "w");
+	File file = OpenFile(sPath, "w");
 	
 	if (file == null) 
-		ThrowError("Error opening up file for writing: %s", g_sFilePath);
+		ThrowError("Error opening up file for writing: %s", sPath);
 	
 	int tblidx = FindStringTable("ParticleEffectNames");
 	
@@ -49,5 +49,7 @@ public void OnPluginStart()
 	}
 	
 	delete file;
-	PrintToServer("Particles file generated successfully at: %s", g_sFilePath);
+	PrintToServer("Particles file generated successfully for %s at: %s", sGame, sPath);
+	
+	ServerCommand("sm plugins unload getparticlelist");
 }
