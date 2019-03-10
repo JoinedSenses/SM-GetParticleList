@@ -30,7 +30,7 @@ public void OnPluginStart() {
 
 	GetGameFolderName(g_sGame, sizeof(g_sGame));
 
-	BuildPath(Path_SM, g_sFilePath, sizeof(g_sFilePath), "/data/particles/%s_particles.txt", g_sGame);
+	BuildPath(Path_SM, g_sFilePath, sizeof(g_sFilePath), "/data/particles/%s.txt", g_sGame);
 }
 
 public Action cmdGetParticleList(int client, int args) {
